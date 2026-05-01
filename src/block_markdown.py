@@ -198,6 +198,15 @@ def markdown_to_html_node(block:str):
    
    
    return ParentNode(tag="div",children=children_nodes)
+def extract_title(markdown:str)->str:
+    blocks = markdown_to_blocks(markdown)
+    if len(blocks) == 0:
+        raise ValueError("invalid markdown")
+    head_block = list(filter(lambda bl:get_tag_heading(bl) == "h1",filter(is_heading_block,blocks)))
+    
+    if len(head_block) != 1:
+        raise ValueError("no tag heading present")
+    return head_block[0].strip("# ")
 
 
 
