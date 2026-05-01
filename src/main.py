@@ -2,10 +2,15 @@ from textnode import TextNode,TextType
 from htmlnode import HTMLNode
 from copy_dir import copy_dir_to_dest
 from generate_page import generate_page,generate_pages_recursive
+import sys
 
 def main():
-    copy_dir_to_dest("static","public")
-    generate_pages_recursive("content","template.html","public")
+    name_program = "/"
+    if len(sys.argv) >=1:
+        name_program=sys.argv[0]
+    
+    copy_dir_to_dest("static","docs")
+    generate_pages_recursive("content","template.html","docs",name_program)
     
     #text_node = TextNode("example_text",TextType.TEXT)
     #second_text_node = TextNode("This is some anchor text",TextType.LINK,"https://www.boot.dev")
